@@ -16,7 +16,7 @@ class MechanixSearchBar extends StatelessWidget {
   final bool showDefaultTrailing;
   final VoidCallback? onTap;
   final TapRegionCallback? onTapOutside;
-
+  final FocusNode? focusNode;
   final VoidCallback? onBackwardIconPress;
   final VoidCallback? onCloseIconPress;
 
@@ -36,7 +36,8 @@ class MechanixSearchBar extends StatelessWidget {
       this.onBackwardIconPress,
       this.onCloseIconPress,
       this.onTap,
-      this.onTapOutside});
+      this.onTapOutside,
+      this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +61,7 @@ class MechanixSearchBar extends StatelessWidget {
         hintStyle ?? barTheme.hintStyle ?? _MechanixSearchBarTheme.hintStyle;
 
     return SearchBar(
+      focusNode: focusNode ?? FocusNode(),
       onTap: onTap,
       onTapOutside: onTapOutside,
       onChanged: onChanged,
@@ -194,9 +196,7 @@ class _MechanixSearchBarTheme {
   // Colors
   static const Color backgroundColor = Color(0xFF363636);
   static const Color overlayColor = Colors.transparent;
-  static const Color buttonBackgroundColor = Color(0xFF4D4D4D);
   static const Color borderColor = Color(0xFF4D4D4D);
-  static const Color dividerColor = Color(0xFF4D4D4D);
 
   // Sizes
   static const double defaultIconSize = 24.0;
@@ -207,8 +207,6 @@ class _MechanixSearchBarTheme {
 
   // Layout
   static const double trailingContainerWidth = 113.0;
-  static const double dividerWidth = 1.0;
-  static const double dividerHeight = 36.0;
 
   static WidgetStateProperty<TextStyle?> hintStyle = WidgetStateProperty.all(
     TextStyle(color: Color(0xFFA6A6A6)),
